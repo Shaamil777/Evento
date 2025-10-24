@@ -1,0 +1,11 @@
+.carousal-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500; /* optional – makes it bolder */
+  letter-spacing: 1px; /* optional – improves readability */
+  color: #DCCA3B,
+}
+.carousal-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
