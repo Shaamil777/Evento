@@ -1,5 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import IntroSection from '../components/sections/IntroSection';
+import FeatureSection from '../components/sections/FeatureSection';
+import GallerySection from '../components/sections/GallerySection';
+import FAQSection from '../components/sections/FAQSection';
 
 const Navbar = lazy(() => import('../components/layout/Navbar'));
 const HeroSection = lazy(() => import('../components/sections/HeroSection'));
@@ -13,10 +16,14 @@ function MainPage() {
         </div>
       }
     >
+     
+
       <Navbar />
       <HeroSection />
       <IntroSection/>
-      
+      <FeatureSection/>
+      <GallerySection/>
+      <FAQSection/>
     </Suspense>
   );
 }

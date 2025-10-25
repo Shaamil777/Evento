@@ -1,3 +1,4 @@
+
 .carousal-title {
   font-family: "Cormorant Garamond", serif;
   font-weight: 500; /* optional – makes it bolder */
@@ -9,3 +10,24 @@
   font-weight: 400;
   letter-spacing: 0.5px;
 }
+
+/* feature section background */
+.featureBackground{
+  background-color: #f5f5f5;
+}
+/* Card Title Style */
+.card-title {
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Card Text Style */
+.card-text {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  /* soft gray or white tone for readability */
+  line-height: 1.6;
+}
+
