@@ -3,6 +3,9 @@ import IntroSection from '../components/sections/IntroSection';
 import FeatureSection from '../components/sections/FeatureSection';
 import GallerySection from '../components/sections/GallerySection';
 import FAQSection from '../components/sections/FAQSection';
+import VideoSection from '../components/sections/VideoSection';
+import ContactSection from '../components/sections/ContactSection';
+import Footer from '../components/layout/Footer';
 
 const Navbar = lazy(() => import('../components/layout/Navbar'));
 const HeroSection = lazy(() => import('../components/sections/HeroSection'));
@@ -23,7 +26,10 @@ function MainPage() {
       <IntroSection/>
       <FeatureSection/>
       <GallerySection/>
+      <VideoSection/>
       <FAQSection/>
+      <ContactSection/>
+      <Footer/>
     </Suspense>
   );
 }

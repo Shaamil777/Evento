@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { X } from "lucide-react";
-import VideoSection from "../VideoSection";
+import { X, Play } from "lucide-react";
 
 const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const images = [
     {
@@ -19,14 +19,16 @@ const GallerySection = () => {
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&q=80",
-      alt: "Stage performance view",
+      type: "video",
+      videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+      thumbnail: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&q=80",
+      alt: "Stage performance video",
+      span: "col-span-2",
     },
     {
       id: 4,
       url: "https://images.unsplash.com/photo-1465925783360-4c8c85c44ed8?w=800&q=80",
       alt: "Concert hall interior",
-      span: "col-span-2",
     },
     {
       id: 5,
@@ -35,8 +37,11 @@ const GallerySection = () => {
     },
     {
       id: 6,
-      url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
-      alt: "Auditorium ceiling lights",
+      type: "video",
+      videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+      thumbnail: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
+      alt: "Auditorium tour video",
+      span: "row-span-2",
     },
     {
       id: 7,
@@ -50,8 +55,10 @@ const GallerySection = () => {
     },
     {
       id: 10,
-      url: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&q=80",
-      alt: "Empty auditorium before event",
+      type: "video",
+      videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+      thumbnail: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&q=80",
+      alt: "Event highlights video",
     },
     {
       id: 11,
@@ -66,46 +73,67 @@ const GallerySection = () => {
     },
   ];
 
-  const openLightbox = (image) => setSelectedImage(image);
-  const closeLightbox = () => setSelectedImage(null);
+  const openLightbox = (item) => {
+    if (item.type === "video") {
+      setSelectedVideo(item);
+    } else {
+      setSelectedImage(item);
+    }
+  };
+
+  const closeLightbox = () => {
+    setSelectedImage(null);
+    setSelectedVideo(null);
+  };
 
   return (
-    <section className="py-16 px-4 pt-50 bg-gradient-to-b from-gray-50 to-white">
+    <section className="pt-8 pb-16 px-4 featureBackground from-gray-50 to-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-5xl carousal-title font-bold text-gray-900 mb-4">
             Our Auditorium Gallery
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className=" carousal-text text-gray-600 max-w-2xl mx-auto">
             Explore our state-of-the-art auditorium facilities designed to host
             memorable events and performances.
           </p>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 auto-rows-[180px] md:auto-rows-[220px]">
-          {images.map((image) => (
+        <div className="grid grid-cols-2 md:grid-cols-4  gap-2 auto-rows-[180px] md:auto-rows-[220px]">
+          {images.map((item) => (
             <div
-              key={image.id}
-              className={`relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group ${image.span}`}
-              onClick={() => openLightbox(image)}
+              key={item.id}
+              className={`relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group ${item.span || ""}`}
+              onClick={() => openLightbox(item)}
             >
               <img
-                src={image.url}
-                alt={image.alt}
+                src={item.type === "video" ? item.thumbnail : item.url}
+                alt={item.alt}
                 className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+              
+              {/* Video Play Button Overlay */}
+              {item.type === "video" && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-black bg-opacity-60 rounded-full p-4 group-hover:bg-opacity-80 transition-all duration-300">
+                    <Play size={32} className="text-white fill-white" />
+                  </div>
+                </div>
+              )}
+              
+              {/* Hover Overlay */}
+              <div className="absolute inset-0  bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                 <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-semibold tracking-wide">
-                  View Image
+                  {item.type === "video" ? "Play Video" : "View Image"}
                 </span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Lightbox */}
+        {/* Image Lightbox */}
         {selectedImage && (
           <div
             className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
@@ -128,8 +156,38 @@ const GallerySection = () => {
             </p>
           </div>
         )}
+
+        {/* Video Lightbox */}
+        {selectedVideo && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4"
+            onClick={closeLightbox}
+          >
+            <button
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+              onClick={closeLightbox}
+            >
+              <X size={32} />
+            </button>
+            <div 
+              className="relative w-full max-w-5xl aspect-video"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                className="w-full h-full rounded-lg"
+                src={`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1&controls=1`}
+                title={selectedVideo.alt}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <p className="absolute bottom-8 text-white text-center text-lg px-4">
+              {selectedVideo.alt}
+            </p>
+          </div>
+        )}
       </div>
-      <VideoSection/>
     </section>
   );
 };

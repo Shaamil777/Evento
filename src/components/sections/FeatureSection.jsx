@@ -72,22 +72,22 @@ const FeatureSection = () => {
   const pathLength = 1800;
 
   return (
-    <div className="featureBackground py-20 px-4">
+    <div className="featureBackground py-20 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl sm:text-6xl carousal-title font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl carousal-title font-bold text-gray-900 mb-4">
             Why Choose <span className="text-yellow-500">Evento</span>
           </h2>
-          <p className="text-gray-600 carousal-text max-w-2xl mx-auto">
-            Discover why we’re the most preferred destination for celebrations,
+          <p className="text-gray-600 carousal-text max-w-2xl mx-auto px-4">
+            Discover why we're the most preferred destination for celebrations,
             conferences, and memories that last forever.
           </p>
           <div className="w-24 h-1.5 bg-yellow-500 mx-auto mt-6 rounded-full"></div>
         </div>
 
-        {/* Features Curve Section */}
-        <div ref={sectionRef} className="relative min-h-[1400px]">
+        {/* Features Curve Section - Desktop */}
+        <div ref={sectionRef} className="relative min-h-[1600px] hidden lg:block pb-32">
           {/* SVG Path */}
           <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[500px] h-full">
             <svg
@@ -102,7 +102,6 @@ const FeatureSection = () => {
                 strokeWidth="3"
                 strokeLinecap="round"
               />
-              {/* reverted back to the simple gold gradient */}
               <path
                 d={pathD}
                 fill="none"
@@ -128,12 +127,12 @@ const FeatureSection = () => {
             </svg>
           </div>
 
-          {/* Feature Cards */}
+          {/* Feature Cards - Desktop */}
           <div className="relative">
             {features.map((feature, index) => {
               const totalCards = features.length;
-              const triggerStart = index / totalCards - 0.05;
-              const triggerEnd = (index + 1) / totalCards + 0.05;
+              const triggerStart = index / totalCards - 0.08;
+              const triggerEnd = (index + 1) / totalCards + 0.15;
               const isActive =
                 scrollProgress >= triggerStart &&
                 scrollProgress <= triggerEnd;
@@ -156,39 +155,66 @@ const FeatureSection = () => {
                         : "translate-x-20 opacity-0"
                     }`}
                   >
-                    {/* Gradient Border Card */}
-                  <div
-                    className={`relative rounded-2xl p-[2px] transition-all duration-500 ${
-                      isActive
-                        ? "bg-gradient-to-br from-yellow-400 via-white to-amber-400 shadow-2xl scale-[1.04]"
-                        : "bg-gradient-to-br from-gray-200 via-white to-gray-100"
-                    }`}
-                  >
-                    <div className="bg-white rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
-                      <img
-                        src={feature.image}
-                        alt={feature.title}
-                        className="w-full h-64 object-cover"
-                      />
-                      <div className="p-7">
-                        <h5 className="text-2xl font-semibold card-title text-gray-900 mb-3">
-                          {feature.title}
-                        </h5>
-                        <p className="text-gray-700 card-text mb-5">
-                          {feature.description}
-                        </p>
-                        <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-5 py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
-                          Learn More
-                        </button>
+                    <div
+                      className={`relative rounded-2xl p-[2px] transition-all duration-500 ${
+                        isActive
+                          ? "bg-gradient-to-br from-yellow-400 via-white to-amber-400 shadow-2xl scale-[1.04]"
+                          : "bg-gradient-to-br from-gray-200 via-white to-gray-100"
+                      }`}
+                    >
+                      <div className="bg-white rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
+                        <img
+                          src={feature.image}
+                          alt={feature.title}
+                          className="w-full h-52 object-cover"
+                        />
+                        <div className="p-6">
+                          <h5 className="text-xl font-semibold card-title text-gray-900 mb-2">
+                            {feature.title}
+                          </h5>
+                          <p className="text-gray-700 card-text mb-4 text-sm">
+                            {feature.description}
+                          </p>
+                          <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-5 py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
+                            Learn More
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
                   </div>
                 </div>
               );
             })}
           </div>
+        </div>
+
+        {/* Mobile View - Simple Grid */}
+        <div className="lg:hidden grid gap-6 max-w-md mx-auto pb-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-gradient-to-br from-yellow-400 via-white to-amber-400 rounded-2xl p-[2px] shadow-lg"
+            >
+              <div className="bg-white rounded-2xl overflow-hidden">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h5 className="text-xl font-semibold card-title text-gray-900 mb-2">
+                    {feature.title}
+                  </h5>
+                  <p className="text-gray-700 card-text mb-4 text-sm">
+                    {feature.description}
+                  </p>
+                  <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md text-sm">
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
