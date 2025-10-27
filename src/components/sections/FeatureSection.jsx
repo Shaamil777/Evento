@@ -73,7 +73,7 @@ const FeatureSection = () => {
 
   return (
     <div className="featureBackground py-20 px-4 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mt-20">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-4xl sm:text-5xl md:text-6xl carousal-title font-bold text-gray-900 mb-4">

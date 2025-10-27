@@ -25,8 +25,8 @@ function MainPage() {
       <HeroSection />
       <IntroSection/>
       <FeatureSection/>
-      <GallerySection/>
       <VideoSection/>
+      <GallerySection/>
       <FAQSection/>
       <ContactSection/>
       <Footer/>
