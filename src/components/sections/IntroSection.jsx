@@ -15,7 +15,7 @@ export default function IntroSection() {
       </div> */}
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/0 via-gray-800/0 to-gray-900/0"></div>
+      <div className="absolute inset-0 from-gray-900/0 via-gray-800/0 to-gray-900/0"></div>
 
       {/* Intro Section */}
       <section className="w-full px-6 sm:px-8 md:px-12 lg:px-24 relative mt-20 z-10 flex items-center justify-center">
